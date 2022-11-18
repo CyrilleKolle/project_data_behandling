@@ -18,14 +18,16 @@ age_distribution = OlympicsData().age_distribution()
 data_dict = {'france_most': df_max_france, 'age_distribution': age_distribution}
 
 
-app.layout = Layout(data_dict).layout()
+app.layout = Layout(df_max_france).layout()
 
 @app.callback(
     Output('filtered-df', 'data'),
-    Input('data-dropdown', 'value') 
+    Input('data-dropdown', 'value')
+    
+    
 )
-def filter_df(df):
-    dff = data_dict[df]
+def filter_df():
+    dff = data_dict
     return dff.to_json()
 
 @app.callback(
@@ -33,7 +35,7 @@ def filter_df(df):
     Input('filtered-df', 'data'),
     
 )
-def data_graphs(json_df):
+def data_graphs(json_df, ohlc):
     dff = pd.read_json(json_df)
     dff_max_france = dff['france_most']
     return px.bar(dff_max_france, x='Medal', y='Sport')

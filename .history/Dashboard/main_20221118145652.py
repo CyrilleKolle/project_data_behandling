@@ -33,7 +33,7 @@ def filter_df(df):
     Input('filtered-df', 'data'),
     
 )
-def data_graphs(json_df):
+def data_graphs(json_df, ohlc):
     dff = pd.read_json(json_df)
     dff_max_france = dff['france_most']
     return px.bar(dff_max_france, x='Medal', y='Sport')
