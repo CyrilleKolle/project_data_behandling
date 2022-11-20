@@ -50,6 +50,7 @@ class Layout:
                                 dbc.Row(
                                     children=[
                                         dbc.Col(
+                                            
                                             [
                                                 dcc.Graph(id="france-max-graph"),
                                             ],
@@ -74,6 +75,15 @@ class Layout:
                                 dbc.Row(
                                     [
                                         dcc.Graph(id="france-medal-distribution"),
+                                        
+                                    ]
+                                   
+                                ),
+                                dbc.Row(
+                                    children=[
+                                        dbc.Col([dcc.Graph(id="goat-gold")]),
+                                        dbc.Col([dcc.Graph(id="goat-silver")]),
+                                        dbc.Col([dcc.Graph(id="goat-bronze")]),
                                     ]
                                 ),
                             ]

@@ -23,7 +23,7 @@ df_dict = {symbol: olympicsData_object.olympics_dataframe(symbol) for symbol in 
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.MATERIA],
-    meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
+    meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.2, minimum-scale=0.5")],
 )
 app.layout = Layout(symbol_dict).layout()
 
@@ -80,7 +80,42 @@ def medal_distribution_france(json_df):
     fig.update_layout( plot_bgcolor="rgba(255,255,255,0.9)")
     fig.update_xaxes(type='log',showgrid=False,showline=True, linecolor="#000")
     fig.update_yaxes(type='log',showgrid=False, showline=True,linecolor="#000")
-    
+    return fig.show()
+@app.callback(
+    Output('goat-gold','figure'),
+    Input('filtered-df','data')
+)
+def goat_gold(json_df):
+    dff = pd.read_json(json_df)
+    gold = dff.query("Medal == 'Gold'")
+    gold = gold.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
+    gold = gold.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
+    fig = px.bar(gold, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
+    fig.update_layout(title='Most Gold at olympics')
+    return fig.show()
+@app.callback(
+    Output('goat-silver','figure'),
+    Input('filtered-df','data')
+)
+def goat_gold(json_df):
+    dff = pd.read_json(json_df)
+    silver = dff.query("Medal == 'Silver'")
+    silver = silver.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
+    silver = silver.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
+    fig = px.bar(silver, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
+    fig.update_layout(title='Most Silver at olympics')
+    return fig.show()
+@app.callback(
+    Output('goat-bronze','figure'),
+    Input('filtered-df','data')
+)
+def goat_gold(json_df):
+    dff = pd.read_json(json_df)
+    bronze = dff.query("Medal == 'Bronze'")
+    bronze = bronze.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
+    bronze = bronze.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
+    fig = px.bar(bronze, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
+    fig.update_layout(title='Most Bronze at olympics')
     return fig.show()
 if __name__ == "__main__":
     app.run_server(debug=True)
