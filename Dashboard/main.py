@@ -6,7 +6,7 @@ from load_data import OlympicsData
 from layout import Layout
 import dash
 import os
-
+from countries import countries
 
 
 directory_path = os.path.dirname(__file__)
@@ -19,13 +19,13 @@ symbol_dict = {'athlete':'Olympics Athlete Events'}
 # data_dict = {'france-most': df_max_france, 'age-distribution': age_distribution}
 
 df_dict = {symbol: olympicsData_object.olympics_dataframe(symbol) for symbol in symbol_dict}
-
+countries_dict = countries
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.MATERIA],
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.2, minimum-scale=0.5")],
 )
-app.layout = Layout(symbol_dict).layout()
+app.layout = Layout(symbol_dict, countries_dict).layout()
 
 @app.callback(
     Output('filtered-df', 'data'),
@@ -168,5 +168,46 @@ def sweden_france(json_df):
                                 x=item.data[0]['x'], y=item.data[0]['y'], showlegend=True), row=1, col=1)
 
     return fig
+
+
+@app.callback(
+    Output('country-info', 'figure'),
+    Input('filtered-df','data'),
+    Input("country-picker-dropdown", "value"),
+    
+)
+def country_graph(json_df, country, ohlc):
+    import plotly_express as px
+    from plotly.subplots import make_subplots
+    import plotly.graph_objects as go
+
+    dff = pd.read_json(json_df)
+    df_country = dff[dff["NOC"] == country]
+    df_country = df_country.groupby(['Sex']).agg({'Age':'mean','Height':'mean', 'Weight':'mean', 'Medal':'mean'}).set_index('Sex')
+    # country_code = dict(zip(dff['NOC'], dff['NOC']))
+    # len(country_code)
+    # print(country)
+    fig = make_subplots(rows=1, cols=1)
+    trace1 = px.bar(df_country, x=df_country.index,
+                    y='Age')
+    trace2 = px.bar(df_country, x=df_country.index,
+                    y='Height')
+    trace3 = px.bar(df_country, x=df_country.index,
+                    y='weight')
+    trace4 = px.bar(df_country, x=df_country.index,
+                    y='Medal')
+   
+    trace_list = [trace1, trace2, trace3]
+    y_axis_titles = ["Age", "Height", "Weight", 'Medal']
+
+
+    for i, (item, title) in enumerate(zip(trace_list, y_axis_titles)):
+        fig.add_trace(go.Bar(name=title,
+                                x=item.data[0]['x'], y=item.data[0]['y'], showlegend=True), row=1, col=1)
+
+
+    return fig
+
+    
 if __name__ == "__main__":
     app.run_server(debug=True)
