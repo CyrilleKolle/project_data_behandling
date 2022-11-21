@@ -20,7 +20,7 @@ class Layout:
                     className="mt-4",
                     children=[
                         dbc.Col(
-                            html.Header("Athlete Events"),
+                            html.Header(html.H2("Athlete Events")),
                             className="mt-1",
                             xs=12,
                             sm=12,
@@ -73,7 +73,7 @@ class Layout:
                                             sm=12,
                                             md=12,
                                             lg=4,
-                                            xl={"offset": 2, "size": 2},
+                                            xl={"offset": 2, "size": 4},
                                         ),
                                     ]
                                 ),
