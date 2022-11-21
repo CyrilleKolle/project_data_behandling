@@ -38,7 +38,7 @@ class Layout:
                             sm=12,
                             md=12,
                             lg=4,
-                            xl=3,
+                            xl={"offset": 2, "size": 2},
                         ),
                     ],
                 ),
@@ -50,40 +50,101 @@ class Layout:
                                 dbc.Row(
                                     children=[
                                         dbc.Col(
-                                            
                                             [
-                                                dcc.Graph(id="france-max-graph"),
+                                                dcc.Graph(
+                                                    id="france-max-graph",
+                                                    style={"display": "inline-block"},
+                                                ),
                                             ],
-                                            xs="12",
-                                            sm="12",
-                                            md="12",
-                                            lg={"size": 6},
-                                            xl="6",
+                                            xs=12,
+                                            sm=12,
+                                            md=12,
+                                            lg=4,
+                                            xl={"offset": 2, "size": 2},
                                         ),
                                         dbc.Col(
                                             [
-                                                dcc.Graph(id="france-all-ages"),
+                                                dcc.Graph(
+                                                    id="france-all-ages",
+                                                    style={"display": "inline-block"},
+                                                ),
                                             ],
-                                            xs="12",
-                                            sm="12",
-                                            md="12",
-                                            lg={"size": 6},
-                                            xl="6",
+                                            xs=12,
+                                            sm=12,
+                                            md=12,
+                                            lg=4,
+                                            xl={"offset": 2, "size": 2},
                                         ),
                                     ]
                                 ),
                                 dbc.Row(
                                     [
-                                        dcc.Graph(id="france-medal-distribution"),
+                                        dcc.Graph(
+                                            id="france-medal-distribution",
+                                            style={"display": "inline-block"},
+                                        ),
                                         
                                     ]
-                                   
+                                    
                                 ),
                                 dbc.Row(
                                     children=[
-                                        dbc.Col([dcc.Graph(id="goat-gold")]),
-                                        dbc.Col([dcc.Graph(id="goat-silver")]),
-                                        dbc.Col([dcc.Graph(id="goat-bronze")]),
+                                        dbc.Col(
+                                            [
+                                                dcc.Graph(
+                                                    id="goat-gold",
+                                                    style={"display": "inline-block"},
+                                                )
+                                            ],
+                                            xs=12,
+                            sm=12,
+                            md=12,
+                            lg=4,
+                            xl={"offset": 2, "size": 2},
+                                        ),
+                                        dbc.Col(
+                                            [
+                                                dcc.Graph(
+                                                    id="goat-silver",
+                                                    style={"display": "inline-block"},
+                                                )
+                                            ],
+                                            xs=12,
+                                            sm=12,
+                                            md=12,
+                                            lg=4,
+                                            xl={"offset": 2, "size": 2},
+                                        ),
+                                        dbc.Col(
+                                            [
+                                                dcc.Graph(
+                                                    id="goat-bronze",
+                                                    style={"display": "inline-block"},
+                                                )
+                                            ],
+                                            xs=12,
+                                            sm=12,
+                                            md=12,
+                                            lg=4,
+                                            xl={"offset": 2, "size": 2},
+                                        ),
+                                    ]
+                                ),
+                                dbc.Row(
+                                    children=[
+                                        dbc.Col(
+                                            [
+                                                dcc.Graph(
+                                                    id="sweden-france",
+                                                    style={"display": "inline-block"},
+                                                )
+                                            ],
+                                            xs=12,
+                                            sm=12,
+                                            md=12,
+                                            lg=4,
+                                            xl={"offset": 2, "size": 2},
+                                        ),
                                     ]
                                 ),
                             ]

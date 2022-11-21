@@ -117,5 +117,56 @@ def goat_gold(json_df):
     fig = px.bar(bronze, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
     fig.update_layout(title='Most Bronze at olympics')
     return fig.show()
+
+@app.callback(
+    Output('sweden-france', 'figure'),
+    Input('filtered-df','data')
+)
+def sweden_france(json_df):
+    import plotly_express as px
+    from plotly.subplots import make_subplots
+    import plotly.graph_objects as go
+
+    dff = pd.read_json(json_df)
+    
+    france = dff[dff["NOC"] == "FRA"]
+    gold_fra = france.query("Medal == 'Gold'")
+    gold_fra = gold_fra.groupby(['NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index()
+    silver_fra = france.query("Medal == 'Silver'")
+    silver_fra = silver_fra.groupby(['NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index()
+    bronze_fra = france.query("Medal == 'Bronze'")
+    bronze_fra = bronze_fra.groupby(['NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index()
+    france_combined_medals = pd.merge(gold_fra, silver_fra, on='NOC', how='outer').merge(bronze_fra, on='NOC', how='outer').fillna(0)
+    france_combined_medals = france_combined_medals.rename(columns={'Medal_x':'Gold', 'Medal_y':'Silver', 'Medal':'Bronze'})
+   
+    sweden = dff[dff["NOC"] == "SWE"]
+    gold_swe = sweden.query("Medal == 'Gold'")
+    gold_swe = gold_swe.groupby(['NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index()
+    silver_swe = sweden.query("Medal == 'Silver'")
+    silver_swe = silver_swe.groupby(['NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index()
+    bronze_swe = sweden.query("Medal == 'Bronze'")
+    bronze_swe = bronze_swe.groupby(['NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index()
+    sweden_combined_medals = pd.merge(gold_swe, silver_swe, on='NOC', how='outer').merge(bronze_swe, on='NOC', how='outer').fillna(0)
+    sweden_combined_medals = sweden_combined_medals.rename(columns={'Medal_x':'Gold', 'Medal_y':'Silver', 'Medal':'Bronze'})
+    
+    df_merged = pd.concat([sweden_combined_medals, france_combined_medals], ignore_index=True).set_index('NOC')
+
+    
+    fig = make_subplots(rows=1, cols=1)
+    trace1 = px.bar(df_merged, x=df_merged.index,
+                    y='Gold')
+    trace2 = px.bar(df_merged, x=df_merged.index,
+                    y='Silver')
+    trace3 = px.bar(df_merged, x=df_merged.index, y='Bronze')
+
+    trace_list = [trace1, trace2, trace3]
+    y_axis_titles = ["Gold", "Silver", "Bronze"]
+
+
+    for i, (item, title) in enumerate(zip(trace_list, y_axis_titles)):
+        fig.add_trace(go.Bar(name=title,
+                                x=item.data[0]['x'], y=item.data[0]['y'], showlegend=True), row=1, col=1)
+
+    return fig.show()
 if __name__ == "__main__":
     app.run_server(debug=True)
