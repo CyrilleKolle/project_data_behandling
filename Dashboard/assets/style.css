@@ -1,7 +1,44 @@
+/* Style Document for the Dashboard */
+
+
+
 label {
     margin: 0 0.5rem 0 0.5rem; 
 }
 
+/* Headers */
+
+/* Main Box */
 h1{
     color: red;
+    border: 1px solid red;
+    background-color: whitesmoke;
+    padding: 2%;
+    font-family: "Times New Roman", Times, serif;
 }
+
+.card-body{
+    color: Red;
+    background-color: rgb(58, 58, 186);
+    opacity: 0.8;
+}
+
+/* Headers */ 
+
+h2{
+    color: green;
+}
+
+h3{
+    color: Yellow;
+}
+
+/* Divs */
+
+
+
+/*.row {
+    background-color: yellowgreen;
+}*/
+
+

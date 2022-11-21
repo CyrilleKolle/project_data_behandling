@@ -60,7 +60,7 @@ def histogram_all_france_ages(json_df):
     france_ages = data_for_ages['Age'].drop_duplicates().reset_index()
     fig = px.histogram(france_ages, x="Age", y=france_ages.index,nbins=10)
     fig.update_layout(bargap=0.1)
-    return px.histogram(france_ages, x="Age", y=france_ages.index,nbins=10)
+    return fig
 
 @app.callback(
     Output('france-medal-distribution', 'figure'),
@@ -80,7 +80,7 @@ def medal_distribution_france(json_df):
     fig.update_layout( plot_bgcolor="rgba(255,255,255,0.9)")
     fig.update_xaxes(type='log',showgrid=False,showline=True, linecolor="#000")
     fig.update_yaxes(type='log',showgrid=False, showline=True,linecolor="#000")
-    return fig.show()
+    return fig
 @app.callback(
     Output('goat-gold','figure'),
     Input('filtered-df','data')
@@ -92,7 +92,7 @@ def goat_gold(json_df):
     gold = gold.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
     fig = px.bar(gold, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
     fig.update_layout(title='Most Gold at olympics')
-    return fig.show()
+    return fig
 @app.callback(
     Output('goat-silver','figure'),
     Input('filtered-df','data')
@@ -104,7 +104,7 @@ def goat_gold(json_df):
     silver = silver.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
     fig = px.bar(silver, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
     fig.update_layout(title='Most Silver at olympics')
-    return fig.show()
+    return fig
 @app.callback(
     Output('goat-bronze','figure'),
     Input('filtered-df','data')
@@ -116,7 +116,7 @@ def goat_gold(json_df):
     bronze = bronze.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
     fig = px.bar(bronze, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
     fig.update_layout(title='Most Bronze at olympics')
-    return fig.show()
+    return fig
 
 @app.callback(
     Output('sweden-france', 'figure'),
@@ -167,6 +167,6 @@ def sweden_france(json_df):
         fig.add_trace(go.Bar(name=title,
                                 x=item.data[0]['x'], y=item.data[0]['y'], showlegend=True), row=1, col=1)
 
-    return fig.show()
+    return fig
 if __name__ == "__main__":
     app.run_server(debug=True)
