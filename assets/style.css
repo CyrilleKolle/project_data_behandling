@@ -73,13 +73,12 @@ h3{
 /* General Graph Stylings*/
 
 .dash-graph{
-    border-color: rgb(125, 191, 230);
-    border-style: solid;
-    border-width: thin;
+    
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 140%;
+    
   
 }
 
@@ -100,7 +99,10 @@ h3{
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-
+    border-radius: 2%;
+    border-color: rgb(125, 191, 230);
+    border-style: solid;
+    border-width: thin;
 }
 
 .col{
@@ -150,5 +152,31 @@ font-size: 100%;
     font-size: 110%;
     font-weight: bold;
 }
-
-
+#goat-gold{
+    width: 99%
+}
+#goat-silver{
+    width:99%
+}
+#goat-bronze{
+    width:99%
+}
+#france-medal-distribution{
+    width:98%
+}
+#france-sweden{
+    width:89%
+}
+#country-info{
+    width:98%
+}
+#france-max-graph{
+    width:99%;
+    margin: auto
+}
+#france-all-ages{
+    width:99%;
+    margin: auto
+}
+#france-trophy{
+}

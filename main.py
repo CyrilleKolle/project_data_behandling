@@ -57,8 +57,9 @@ def data_graphs(olympic_option):
     df_max['rank'] = df_max.groupby('Sport')['Medal'].rank(ascending=False)
     df_max = df_max.loc[df_max['rank'].eq(1)].drop('rank', axis=1)
     df_max_france = df_max[df_max['NOC'] == 'FRA']
-    #df_max_france
-    return px.bar(df_max_france, x='Medal', y='Sport')
+    fig = px.bar(df_max_france, x='Medal', y='Sport', title='France Most Dominated sports')
+    fig.update_layout()
+    return fig
 
 @app.callback(
     Output('france-all-ages','figure'),
@@ -66,9 +67,10 @@ def data_graphs(olympic_option):
 )
 def histogram_all_france_ages(json_df):
     dff = df.copy()
+    dff = dff[dff['NOC'] == 'FRA']
     dff = dff[dff['Age'].notna()]
     dff = dff['Age'].drop_duplicates().reset_index()
-    fig = px.histogram(dff, x="Age", y=dff.index,nbins=10)
+    fig = px.histogram(dff, x="Age", y=dff.index,nbins=10, title='France Age distribution')
     fig.update_layout(bargap=0.1)
     return fig
 

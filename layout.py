@@ -53,6 +53,7 @@ class Layout:
                     )
                 ),
                 dbc.Row(
+                    id='france-trophy',
                     className="mt-4",
                     children=[
                         dbc.Col(
@@ -95,7 +96,7 @@ class Layout:
                     children=[
                         dbc.Col(
                             className="mr-1",
-                           children= [
+                            children=[
                                 dcc.Graph(
                                     id="goat-gold",
                                     style={"display": "inline-block"},
@@ -105,7 +106,6 @@ class Layout:
                             sm=12,
                             md=12,
                             lg=4,
-                            
                         ),
                         dbc.Col(
                             className="mr-1",
@@ -119,10 +119,8 @@ class Layout:
                             sm=12,
                             md=12,
                             lg=4,
-                            
                         ),
                         dbc.Col(
-                        
                             children=[
                                 dcc.Graph(
                                     id="goat-bronze",
@@ -139,12 +137,8 @@ class Layout:
                 dbc.Row(
                     className="mt-4 w-full",
                     children=[
-                        dbc.Col(
-                            [
-                                dcc.Graph(
-                                    id="sweden-france",
-                                )
-                            ],
+                        dcc.Graph(
+                            id="sweden-france",
                         ),
                     ],
                 ),
@@ -152,11 +146,10 @@ class Layout:
                     className="mt-4",
                     children=[
                         dbc.Col(
-                            className='mx-2',
+                            className="mx-2",
                             children=[
                                 dcc.Graph(
                                     id="country-info",
-                                    
                                 )
                             ],
                             xs=12,
@@ -172,7 +165,6 @@ class Layout:
                                     options=self._countries_options,
                                     value="SWE",
                                     clearable=True,
-                                    
                                 )
                             ],
                             xs=12,
