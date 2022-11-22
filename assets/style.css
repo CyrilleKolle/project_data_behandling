@@ -16,7 +16,6 @@ label {
 /* Main Box */
 h1{
     color: rgb(31, 31, 176);
-    border: 3px line rgb(188, 188, 188);
     background-color: whitesmoke;
     background: linear-gradient(to left,
     red,
@@ -37,7 +36,24 @@ h1{
     whitesmoke,
     whitesmoke,
     blue);
+    padding-top: 1%;
+    box-shadow: none;
+
+
 }
+
+#mt-3 card
+{
+    margin-top: 100%;
+
+}
+
+#header2
+{
+    margin-top: 10%;
+
+}
+
 
 .card{
     background: linear-gradient(to left,
@@ -45,19 +61,22 @@ h1{
     whitesmoke,
     whitesmoke,
     blue);
+    box-shadow: none;
 }
 
-/* Headers */ 
+/* Headers */
 
 h2{
     color: rgb(31, 31, 176);
-    border: 1px dotted rgb(126, 174, 180);
+    border: 1px line rgb(126, 174, 180);
     background-color: whitesmoke;
     padding: 2%;
     font-family: "Times New Roman", Times, serif;
     font-size: 200%;
     text-shadow: 1px 1px rgba(14, 189, 247, 0.758), 1px 1px rgb(93, 93, 94);
     text-align: center;
+    border-radius: 1%;
+
 }
 
 h3{
