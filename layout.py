@@ -207,7 +207,7 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=4,
+                            lg=6,
                         ),
                         dbc.Col(
                             className="",
