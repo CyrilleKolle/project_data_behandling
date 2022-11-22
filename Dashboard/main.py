@@ -107,18 +107,21 @@ def goat_gold(json_df):
     Output('goat-silver','figure'),
     Input("olympic-dropdown", "value"),
 )
+
 def goat_gold(json_df):
     dff = df.copy()
     dff = dff.query("Medal == 'Silver'")
     dff = dff.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
     dff = dff.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
     fig = px.bar(dff, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
+
     fig.update_layout(title='Most Silver at olympics')
     return fig
 @app.callback(
     Output('goat-bronze','figure'),
     Input("olympic-dropdown", "value"),
 )
+
 def goat_gold(json_df):
     dff = df.copy()
     bronze = dff.query("Medal == 'Bronze'")
@@ -186,17 +189,17 @@ def sweden_france(json_df):
     Input("country-picker-dropdown", "value"),
     
 )
-def country_graph(json_df, country, ohlc):
+def country_graph(json_df, country):
     import plotly_express as px
     from plotly.subplots import make_subplots
     import plotly.graph_objects as go
-
     dff = df.copy()
     dff = dff[dff["NOC"] == country]
     dff = dff.groupby(['Sex']).agg({'Age':'mean','Height':'mean', 'Weight':'mean', 'Medal':'mean'}).set_index('Sex')
     # country_code = dict(zip(dff['NOC'], dff['NOC']))
     # len(country_code)
     # print(country)
+
     fig = make_subplots(rows=1, cols=1)
     trace1 = px.bar(dff, x=dff.index,
                     y='Age')

@@ -18,60 +18,66 @@ class Layout:
         return dbc.Container(
             [
                 dbc.Card(dbc.CardBody(html.H1("Vive La France")), className="mt-3"),
-                dbc.Row(
-                    className="mt-4",
-                    children=[
-                        dbc.Col(
-                            html.Header(html.H2("Athlete Events")),
-                            className="mt-1",
-                            xs=12,
-                            sm=12,
-                            md=6,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
+                dbc.Card(
+                    dbc.CardBody(
+                        dbc.Row(
+                            children=[
+                                dbc.Card(
+                                    dbc.CardBody(
+                                        children=[
+                                            dbc.Col(
+                                                html.Header(html.H2("Athlete Events")),
+                                                className="mx-4",
+                                                xs=12,
+                                                sm=12,
+                                                md=6,
+                                                lg=3,
+                                            ),
+                                            dbc.Col(
+                                                dcc.Dropdown(
+                                                    id="olympic-dropdown",
+                                                    options=self._olympics_options_dropdown,
+                                                    value="athlete",
+                                                ),
+                                                className="mx-4",
+                                                xs=12,
+                                                sm=12,
+                                                md=6,
+                                                lg=3,
+                                            ),
+                                        ],
+                                    )
+                                )
+                            ],
                         ),
-                        dbc.Col(
-                            dcc.Dropdown(
-                                id="olympic-dropdown",
-                                options=self._olympics_options_dropdown,
-                                value="athlete",
-                            ),
-                            xs=12,
-                            sm=12,
-                            md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
-                        ),
-                    ],
+                    )
                 ),
                 dbc.Row(
                     className="mt-4",
                     children=[
                         dbc.Col(
-                            [
+                            className="mx-1",
+                            children=[
                                 dcc.Graph(
                                     id="france-max-graph",
-                                    style={"display": "inline-block"},
                                 ),
                             ],
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
+                            lg=5,
                         ),
                         dbc.Col(
-                            [
+                            className="mx-1",
+                            children=[
                                 dcc.Graph(
                                     id="france-all-ages",
-                                    style={"display": "inline-block"},
                                 ),
                             ],
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 4},
+                            lg=5,
                         ),
                     ],
                 ),
@@ -88,7 +94,8 @@ class Layout:
                     className="mt-4",
                     children=[
                         dbc.Col(
-                            [
+                            className="mx-1",
+                           children= [
                                 dcc.Graph(
                                     id="goat-gold",
                                     style={"display": "inline-block"},
@@ -97,11 +104,11 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
+                            lg=3,
                         ),
                         dbc.Col(
-                            [
+                            className="mx-1",
+                            children=[
                                 dcc.Graph(
                                     id="goat-silver",
                                     style={"display": "inline-block"},
@@ -110,11 +117,11 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
+                            lg=3,
                         ),
                         dbc.Col(
-                            [
+                            className="mx-1",
+                            children=[
                                 dcc.Graph(
                                     id="goat-bronze",
                                     style={"display": "inline-block"},
@@ -123,26 +130,19 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
+                            lg=3,
                         ),
                     ],
                 ),
                 dbc.Row(
-                    className="mt-4",
+                    className="mt-4 w-full",
                     children=[
                         dbc.Col(
                             [
                                 dcc.Graph(
                                     id="sweden-france",
-                                    style={"display": "inline-block"},
                                 )
                             ],
-                            xs=12,
-                            sm=12,
-                            md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
                         ),
                     ],
                 ),
@@ -150,33 +150,33 @@ class Layout:
                     className="mt-4",
                     children=[
                         dbc.Col(
-                            [
+                            className='mx-2',
+                            children=[
                                 dcc.Graph(
                                     id="country-info",
-                                    style={"display": "inline-block"},
+                                    
                                 )
                             ],
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
+                            lg=6,
                         ),
                         dbc.Col(
-                            [
+                            className="mx-2",
+                            children=[
                                 dcc.Dropdown(
                                     id="country-picker-dropdown",
                                     options=self._countries_options,
                                     value="SWE",
                                     clearable=True,
-                                    style={"text-align": "left"},
+                                    
                                 )
                             ],
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=4,
-                            xl={"offset": 2, "size": 2},
+                            lg=2,
                         ),
                     ],
                 ),
