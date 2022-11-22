@@ -70,14 +70,85 @@ h3{
     background-color: red;
 }
 
+/* General Graph Stylings*/
+
 .dash-graph{
     border-color: rgb(125, 191, 230);
     border-style: solid;
     border-width: thin;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 140%;
+  
 }
 
 .goat-gold{
     background-color: red;
     color:blue;
 }
+
+
+
+.card-body{
+    color:transparent;
+}
+
+/* SVG Files styling */
+
+.main-svg{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+}
+
+.col{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300%;
+    color:red;
+    background-color: red;
+}
+
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 300%;
+   /* border: 1px line rgb(126, 174, 180);
+        background: linear-gradient(to left,
+    red,
+    whitesmoke,
+    whitesmoke,
+    blue);*/
+}
+
+/* Drop Down menu colors*/
+
+.Select-menu-outer{
+color:blue;
+background-color: rgb(240, 238, 238);
+font-family: "Times New Roman", Times, serif;
+font-size: 100%;
+
+}
+.Select-value{
+    color:blue;
+    background-color: rgb(209, 240, 215);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+.Select-clear{
+    color:red;
+}
+
+.dash-dropdown{
+    color:rgb(139, 139, 234);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 110%;
+    font-weight: bold;
+}
+
 
