@@ -1,3 +1,5 @@
+#%%
+
 from dash.dependencies import Output, Input
 import plotly_express as px
 import pandas as pd
@@ -9,7 +11,8 @@ import os
 from countries import countries
 
 
-directory_path = os.path.dirname(__file__)
+#directory_path = os.path.dirname(__file__)
+directory_path = os.path.abspath("")
 path = os.path.join(directory_path, "Data")
 
 olympicsData_object = OlympicsData(path)
@@ -18,8 +21,13 @@ symbol_dict = {'athlete':'Olympics Athlete Events'}
 # age_distribution = OlympicsData().age_distribution()
 # data_dict = {'france-most': df_max_france, 'age-distribution': age_distribution}
 
-df_dict = {symbol: olympicsData_object.olympics_dataframe(symbol) for symbol in symbol_dict}
+#df_dict = {symbol: olympicsData_object.olympics_dataframe(symbol) for symbol in symbol_dict}
+df = olympicsData_object.olympics_dataframe("athlete")
+
 countries_dict = countries
+
+#%%
+
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.MATERIA],
@@ -27,47 +35,49 @@ app = dash.Dash(
 )
 app.layout = Layout(symbol_dict, countries_dict).layout()
 
-@app.callback(
-    Output('filtered-df', 'data'),
-    Input('olympic-dropdown', 'value') 
-)
-def filter_df(dataframe):
-    dff_olympics = df_dict['athlete']
-    return dff_olympics[0].to_json()
+# @app.callback(
+#     Output('filtered-df', 'data'),
+#     Input('olympic-dropdown', 'value') 
+# )
+# def filter_df(dataframe):
+#     dff_olympics = df_dict['athlete']
+#     return dff_olympics[0].to_json()
 
 @app.callback(
     Output('france-max-graph', 'figure'),
-    Input('filtered-df', 'data'),   
+    Input("olympic-dropdown", "value"),   
 )
-def data_graphs(json_df):
-    dff = pd.read_json(json_df)
+def data_graphs(olympic_option):
+    #dff = pd.read_json(json_df)
+    dff = df.copy()
     most_medals= dff.groupby(['NOC', 'Sport']).agg({'Medal':'count'}).reset_index()
 
     df_max = most_medals.loc[most_medals['Medal'].ge(most_medals['Medal'])].copy()
     df_max['rank'] = df_max.groupby('Sport')['Medal'].rank(ascending=False)
     df_max = df_max.loc[df_max['rank'].eq(1)].drop('rank', axis=1)
     df_max_france = df_max[df_max['NOC'] == 'FRA']
-    df_max_france
+    #df_max_france
     return px.bar(df_max_france, x='Medal', y='Sport')
 
 @app.callback(
     Output('france-all-ages','figure'),
-    Input('filtered-df', 'data'),
+    Input("olympic-dropdown", "value"),
 )
 def histogram_all_france_ages(json_df):
-    dff = pd.read_json(json_df)
-    data_for_ages = dff[dff['Age'].notna()]
-    france_ages = data_for_ages['Age'].drop_duplicates().reset_index()
-    fig = px.histogram(france_ages, x="Age", y=france_ages.index,nbins=10)
+    dff = df.copy()
+    dff = dff[dff['Age'].notna()]
+    dff = dff['Age'].drop_duplicates().reset_index()
+    fig = px.histogram(dff, x="Age", y=dff.index,nbins=10)
     fig.update_layout(bargap=0.1)
     return fig
 
+#%%
 @app.callback(
     Output('france-medal-distribution', 'figure'),
-    Input('filtered-df', 'data')
+    Input("olympic-dropdown", "value"),
 )
 def medal_distribution_france(json_df):
-    dff = pd.read_json(json_df)
+    dff = df.copy()
     gold_medal_distribution = dff[dff['Medal'] == 'Gold']
     gold_medal_distribution = gold_medal_distribution.groupby('NOC').agg({'Medal':'count'}).reset_index()
     silver_medal_distribution = dff[dff['Medal'] == 'Silver']
@@ -83,34 +93,34 @@ def medal_distribution_france(json_df):
     return fig
 @app.callback(
     Output('goat-gold','figure'),
-    Input('filtered-df','data')
+    Input("olympic-dropdown", "value"),
 )
 def goat_gold(json_df):
-    dff = pd.read_json(json_df)
-    gold = dff.query("Medal == 'Gold'")
-    gold = gold.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
-    gold = gold.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
-    fig = px.bar(gold, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
+    dff = df.copy()
+    dff = dff.query("Medal == 'Gold'")
+    dff = dff.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
+    dff = dff.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
+    fig = px.bar(dff, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
     fig.update_layout(title='Most Gold at olympics')
     return fig
 @app.callback(
     Output('goat-silver','figure'),
-    Input('filtered-df','data')
+    Input("olympic-dropdown", "value"),
 )
 def goat_gold(json_df):
-    dff = pd.read_json(json_df)
-    silver = dff.query("Medal == 'Silver'")
-    silver = silver.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
-    silver = silver.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
-    fig = px.bar(silver, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
+    dff = df.copy()
+    dff = dff.query("Medal == 'Silver'")
+    dff = dff.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
+    dff = dff.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
+    fig = px.bar(dff, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
     fig.update_layout(title='Most Silver at olympics')
     return fig
 @app.callback(
     Output('goat-bronze','figure'),
-    Input('filtered-df','data')
+    Input("olympic-dropdown", "value"),
 )
 def goat_gold(json_df):
-    dff = pd.read_json(json_df)
+    dff = df.copy()
     bronze = dff.query("Medal == 'Bronze'")
     bronze = bronze.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
     bronze = bronze.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
@@ -120,14 +130,14 @@ def goat_gold(json_df):
 
 @app.callback(
     Output('sweden-france', 'figure'),
-    Input('filtered-df','data')
+    Input("olympic-dropdown", "value"),
 )
 def sweden_france(json_df):
     import plotly_express as px
     from plotly.subplots import make_subplots
     import plotly.graph_objects as go
 
-    dff = pd.read_json(json_df)
+    dff = df.copy()
     
     france = dff[dff["NOC"] == "FRA"]
     gold_fra = france.query("Medal == 'Gold'")
@@ -172,7 +182,7 @@ def sweden_france(json_df):
 
 @app.callback(
     Output('country-info', 'figure'),
-    Input('filtered-df','data'),
+    Input("olympic-dropdown", "value"),
     Input("country-picker-dropdown", "value"),
     
 )
@@ -181,20 +191,20 @@ def country_graph(json_df, country, ohlc):
     from plotly.subplots import make_subplots
     import plotly.graph_objects as go
 
-    dff = pd.read_json(json_df)
-    df_country = dff[dff["NOC"] == country]
-    df_country = df_country.groupby(['Sex']).agg({'Age':'mean','Height':'mean', 'Weight':'mean', 'Medal':'mean'}).set_index('Sex')
+    dff = df.copy()
+    dff = dff[dff["NOC"] == country]
+    dff = dff.groupby(['Sex']).agg({'Age':'mean','Height':'mean', 'Weight':'mean', 'Medal':'mean'}).set_index('Sex')
     # country_code = dict(zip(dff['NOC'], dff['NOC']))
     # len(country_code)
     # print(country)
     fig = make_subplots(rows=1, cols=1)
-    trace1 = px.bar(df_country, x=df_country.index,
+    trace1 = px.bar(dff, x=dff.index,
                     y='Age')
-    trace2 = px.bar(df_country, x=df_country.index,
+    trace2 = px.bar(dff, x=dff.index,
                     y='Height')
-    trace3 = px.bar(df_country, x=df_country.index,
+    trace3 = px.bar(dff, x=dff.index,
                     y='weight')
-    trace4 = px.bar(df_country, x=df_country.index,
+    trace4 = px.bar(dff, x=dff.index,
                     y='Medal')
    
     trace_list = [trace1, trace2, trace3]
