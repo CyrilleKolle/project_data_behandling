@@ -17,6 +17,8 @@ This respiratory contains the files related to the OS project. Our group was ass
 
 <!-- Comment -->
 
+--------------------------------------------------------------------------------------
+
 | Dashboard         | Description                                       |
 | ----------------- | ------------------------------------------------- |
 | [Main][l4]        | Contains the main file of our Dashboard           |
@@ -28,8 +30,8 @@ This respiratory contains the files related to the OS project. Our group was ass
 [l2]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Code/task1_country_statistics.ipynb
 [l3]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Code/task2_sports_statistics.ipynb
 [l4]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Dashboard/main.py
-[l5]: https://github.com/CyrilleKolle/project_data_behandling
-[l6]: https://github.com/CyrilleKolle/project_data_behandling
+[l5]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Dashboard/layout.py
+[l6]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Dashboard/load_data.py
 
 
 <img src="Assets/french_chicken.gif" alt="French chickens dancing" width="50%" height="20%" />
