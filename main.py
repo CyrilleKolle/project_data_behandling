@@ -27,12 +27,13 @@ df = olympicsData_object.olympics_dataframe("athlete")
 countries_dict = countries
 
 #%%
-
+# this is a comment
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.MATERIA],
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.2, minimum-scale=0.5")],
-)
+) 
+
 app.layout = Layout(symbol_dict, countries_dict).layout()
 server = app.server
 # @app.callback(
