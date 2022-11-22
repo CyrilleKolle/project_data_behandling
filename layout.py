@@ -53,7 +53,7 @@ class Layout:
                     )
                 ),
                 dbc.Row(
-                    id='france-trophy',
+                    id="france-trophy",
                     className="mt-4",
                     children=[
                         dbc.Col(
@@ -85,9 +85,29 @@ class Layout:
                 dbc.Row(
                     className="mt-4",
                     children=[
-                        dcc.Graph(
-                            id="france-medal-distribution",
-                            style={"display": "inline-block"},
+                        dbc.Col(
+                            children=[
+                                dcc.Graph(
+                                    id="france-medal-distribution",
+                                    style={"display": "inline-block"},
+                                ),
+                            ],
+                            xs=12,
+                            sm=12,
+                            md=12,
+                            lg=8,
+                        ),
+                        dbc.Col(
+                            children=[
+                                dcc.Graph(
+                                    id="top_10",
+                                    style={"display": "inline-block"},
+                                )
+                            ],
+                            xs=12,
+                            sm=12,
+                            md=12,
+                            lg=3,
                         ),
                     ],
                 ),
@@ -171,6 +191,36 @@ class Layout:
                             sm=12,
                             md=12,
                             lg=2,
+                        ),
+                    ],
+                ),
+              dbc.Row(
+                    className="mt-4",
+                    children=[
+                        dbc.Col(
+                            className="mr-1",
+                            children=[
+                                dcc.Graph(
+                                    id="line_gender_from_start",
+                                )
+                            ],
+                            xs=12,
+                            sm=12,
+                            md=12,
+                            lg=4,
+                        ),
+                        dbc.Col(
+                            className="",
+                            children=[
+                                dcc.Graph(
+                                    id="scatter_gender_from_start",
+                                    
+                                )
+                            ],
+                            xs=12,
+                            sm=12,
+                            md=12,
+                            lg=6,
                         ),
                     ],
                 ),
