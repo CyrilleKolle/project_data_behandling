@@ -1,10 +1,10 @@
 /* Style Document for the Dashboard */
 
 body{
-    background-color:transparent;
-    background-image: url("volley.jpg"), url("4k_diving.png"), url("run.jpg"), url("flag2.png");
+    background-color:rgba(244, 244, 244, 0.896);
+    /*background-image: url("volley.jpg"), url("4k_diving.png"), url("run.jpg"), url("flag2.png");
     background-position: top;
-    background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat;*/
 }
 
 label {
@@ -15,7 +15,7 @@ label {
 
 /* Main Box */
 h1{
-    color: whitesmoke;
+    color: rgba(50, 81, 219, 0.652);
     border: 3px line rgb(188, 188, 188);
     background-color: whitesmoke;
     background: linear-gradient(to left,
@@ -26,7 +26,7 @@ h1{
     padding: 2%;
     font-family: "Times New Roman", Times, serif;
     font-size: 500%;
-    text-shadow: 2px 2px rgb(67, 70, 71), 2px 2px rgb(93, 93, 94);
+    text-shadow: 2px 2px rgb(222, 228, 230), 2px 2px rgb(93, 93, 94);
     text-align: center;
 }
 
@@ -43,8 +43,8 @@ h1{
 /* Headers */ 
 
 h2{
-    color: rgb(74, 176, 58);
-    border: 2px dotted rgb(126, 174, 180);
+    color: rgb(31, 31, 176);
+    border: 1px dotted rgb(126, 174, 180);
     background-color: whitesmoke;
     padding: 2%;
     font-family: "Times New Roman", Times, serif;
@@ -69,3 +69,15 @@ h3{
     color:red;
     background-color: red;
 }
+
+.dash-graph{
+    border-color: rgb(125, 191, 230);
+    border-style: solid;
+    border-width: thin;
+}
+
+.goat-gold{
+    background-color: red;
+    color:blue;
+}
+
