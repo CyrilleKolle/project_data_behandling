@@ -186,33 +186,32 @@ def sweden_france(json_df):
 
 @app.callback(
     Output('country-info', 'figure'),
-    Input("olympic-dropdown", "value"),
     Input("country-picker-dropdown", "value"),
     
 )
-def country_graph(json_df, country):
+def country_graph( country):
     import plotly_express as px
     from plotly.subplots import make_subplots
     import plotly.graph_objects as go
     dff = df.copy()
-    dff = dff[dff["NOC"] == country]
-    dff = dff.groupby(['Sex']).agg({'Age':'mean','Height':'mean', 'Weight':'mean', 'Medal':'mean'}).set_index('Sex')
+    dff = dff.dropna()
+
+    dff = dff.groupby(['NOC']).agg({'Age':'mean','Height':'mean', 'Weight':'mean'}).reset_index()
+    
     # country_code = dict(zip(dff['NOC'], dff['NOC']))
     # len(country_code)
     # print(country)
-
+    dff = dff[dff['NOC'] == country]
     fig = make_subplots(rows=1, cols=1)
-    trace1 = px.bar(dff, x=dff.index,
+    trace1 = px.bar(dff, x='NOC',
                     y='Age')
-    trace2 = px.bar(dff, x=dff.index,
+    trace2 = px.bar(dff, x='NOC',
                     y='Height')
-    trace3 = px.bar(dff, x=dff.index,
-                    y='weight')
-    trace4 = px.bar(dff, x=dff.index,
-                    y='Medal')
+    trace3 = px.bar(dff, x='NOC',
+                    y='Weight')
    
     trace_list = [trace1, trace2, trace3]
-    y_axis_titles = ["Age", "Height", "Weight", 'Medal']
+    y_axis_titles = ["Age", "Height", "Weight"]
 
 
     for i, (item, title) in enumerate(zip(trace_list, y_axis_titles)):

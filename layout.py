@@ -94,7 +94,7 @@ class Layout:
                     className="mt-4",
                     children=[
                         dbc.Col(
-                            className="mx-1",
+                            className="mr-1",
                            children= [
                                 dcc.Graph(
                                     id="goat-gold",
@@ -104,10 +104,11 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=3,
+                            lg=4,
+                            
                         ),
                         dbc.Col(
-                            className="mx-1",
+                            className="mr-1",
                             children=[
                                 dcc.Graph(
                                     id="goat-silver",
@@ -117,10 +118,11 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=3,
+                            lg=4,
+                            
                         ),
                         dbc.Col(
-                            className="mx-1",
+                        
                             children=[
                                 dcc.Graph(
                                     id="goat-bronze",
@@ -130,7 +132,7 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=3,
+                            lg=4,
                         ),
                     ],
                 ),
@@ -160,7 +162,7 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=6,
+                            lg=9,
                         ),
                         dbc.Col(
                             className="mx-2",
@@ -183,5 +185,5 @@ class Layout:
                 # storing intermediate value on clients browser in order to share between several callbacks
                 dcc.Store(id="filtered-df"),
             ],
-            fluid=False,
+            fluid=True,
         )
