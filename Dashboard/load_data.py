@@ -13,7 +13,6 @@ class OlympicsData:
             path = os.path.join(self._data_folder_path, olympicsname + path_ending)
             
             olympic = pd.read_csv(path)
-            olympics_df_list.append(olympic)
-        return olympics_df_list
-    
+            #olympics_df_list.append(olympic)
+        return olympic
     

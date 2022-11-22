@@ -5,7 +5,7 @@
 
 This respiratory contains the files related to the OS project. Our group was assigned France (*vi vala France!*).
 
-<img src="Assets/animated-flag_france.gif" alt="French flag waving in the wind" width="50%" height="20%" />
+<img src="assets/animated-flag_france.gif" alt="French flag waving in the wind" width="50%" height="20%" />
 
 ## 2. Navigation
 
@@ -16,6 +16,8 @@ This respiratory contains the files related to the OS project. Our group was ass
 | [Task2][l3]    | Sport statistics, 2-4 sports visualized with graphs and diagrams |
 
 <!-- Comment -->
+
+--------------------------------------------------------------------------------------
 
 | Dashboard         | Description                                       |
 | ----------------- | ------------------------------------------------- |
@@ -28,10 +30,10 @@ This respiratory contains the files related to the OS project. Our group was ass
 [l2]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Code/task1_country_statistics.ipynb
 [l3]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Code/task2_sports_statistics.ipynb
 [l4]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Dashboard/main.py
-[l5]: https://github.com/CyrilleKolle/project_data_behandling
-[l6]: https://github.com/CyrilleKolle/project_data_behandling
+[l5]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Dashboard/layout.py
+[l6]: https://github.com/CyrilleKolle/project_data_behandling/blob/main/Dashboard/load_data.py
 
 
-<img src="Assets/french_chicken.gif" alt="French chickens dancing" width="50%" height="20%" />
+<img src="assets/french_chicken.gif" alt="French chickens dancing" width="50%" height="20%" />
 
 ## 3. References
