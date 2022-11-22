@@ -58,7 +58,7 @@ def data_graphs(olympic_option):
     df_max = df_max.loc[df_max['rank'].eq(1)].drop('rank', axis=1)
     df_max_france = df_max[df_max['NOC'] == 'FRA']
     fig = px.bar(df_max_france, x='Medal', y='Sport', title='France Most Dominated sports')
-    fig.update_layout()
+    fig.update_layout(plot_bgcolor="rgba(255,255,255,0.9)")
     return fig
 
 @app.callback(
@@ -71,14 +71,14 @@ def histogram_all_france_ages(json_df):
     dff = dff[dff['Age'].notna()]
     dff = dff['Age'].drop_duplicates().reset_index()
     fig = px.histogram(dff, x="Age", y=dff.index,nbins=10, title='France Age distribution')
-    fig.update_layout(bargap=0.1)
+    fig.update_layout(bargap=0.1, plot_bgcolor="rgba(255,255,255,0.9)")
     return fig
 
 #%%
 @app.callback(
     Output('france-medal-distribution', 'figure'),
     Input("olympic-dropdown", "value"),
-)
+)   
 def medal_distribution_france(json_df):
     dff = df.copy()
     gold_medal_distribution = dff[dff['Medal'] == 'Gold']
@@ -87,13 +87,16 @@ def medal_distribution_france(json_df):
     silver_medal_distribution = silver_medal_distribution.groupby('NOC').agg({'Medal':'count'}).reset_index()
     bronze_medal_distribution = dff[dff['Medal'] == 'Silver']
     bronze_medal_distribution = bronze_medal_distribution.groupby('NOC').agg({'Medal':'count'}).reset_index()
+    
     combined_medals = pd.merge(gold_medal_distribution, silver_medal_distribution, on='NOC', how='outer').merge(bronze_medal_distribution, on='NOC', how='outer').fillna(0)
     combined_medals = combined_medals.rename(columns={'Medal_x':'Gold', 'Medal_y':'Silver', 'Medal':'Bronze'})
-    fig = px.scatter(combined_medals, x="Silver", color="Gold", size='Bronze', hover_data=['NOC']                 )
+    fig = px.scatter(combined_medals, x="Silver", color="Gold", size='Bronze', hover_data=['NOC'], title="Medal distribution for all countries")
     fig.update_layout( plot_bgcolor="rgba(255,255,255,0.9)")
     fig.update_xaxes(type='log',showgrid=False,showline=True, linecolor="#000")
     fig.update_yaxes(type='log',showgrid=False, showline=True,linecolor="#000")
     return fig
+
+
 @app.callback(
     Output('goat-gold','figure'),
     Input("olympic-dropdown", "value"),
@@ -104,7 +107,7 @@ def goat_gold(json_df):
     dff = dff.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
     dff = dff.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
     fig = px.bar(dff, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
-    fig.update_layout(title='Most Gold at olympics')
+    fig.update_layout(title='Most Gold at olympics', plot_bgcolor="rgba(255,255,255,0.9)")
     return fig
 @app.callback(
     Output('goat-silver','figure'),
@@ -118,7 +121,7 @@ def goat_gold(json_df):
     dff = dff.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
     fig = px.bar(dff, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
 
-    fig.update_layout(title='Most Silver at olympics')
+    fig.update_layout(title='Most Silver at olympics', plot_bgcolor="rgba(255,255,255,0.9)")
     return fig
 @app.callback(
     Output('goat-bronze','figure'),
@@ -131,7 +134,7 @@ def goat_gold(json_df):
     bronze = bronze.groupby(['Name', 'Sport','NOC']).agg({'Medal':'count'}).sort_values(by='Medal', ascending=False).reset_index().head()
     bronze = bronze.filter(['Name', 'Medal', 'Year', 'NOC','Sport'])
     fig = px.bar(bronze, x='Name', y='Medal', hover_data=['Sport', 'NOC'])
-    fig.update_layout(title='Most Bronze at olympics')
+    fig.update_layout(title='Most Bronze at olympics', plot_bgcolor="rgba(255,255,255,0.9)")
     return fig
 
 @app.callback(
@@ -183,6 +186,7 @@ def sweden_france(json_df):
         fig.add_trace(go.Bar(name=title,
                                 x=item.data[0]['x'], y=item.data[0]['y'], showlegend=True), row=1, col=1)
 
+    fig.update_layout(title="Sweden vs France Medal Distribution", plot_bgcolor="rgba(255,255,255,0.9)")
     return fig
 
 
@@ -198,7 +202,7 @@ def country_graph( country):
     dff = df.copy()
     dff = dff.dropna()
 
-    dff = dff.groupby(['NOC']).agg({'Age':'mean','Height':'mean', 'Weight':'mean'}).reset_index()
+    dff = dff.groupby(['NOC']).agg({'Age':'median','Height':'median', 'Weight':'median', 'Medal': 'count'}).reset_index()
     
     # country_code = dict(zip(dff['NOC'], dff['NOC']))
     # len(country_code)
@@ -211,16 +215,18 @@ def country_graph( country):
                     y='Height')
     trace3 = px.bar(dff, x='NOC',
                     y='Weight')
+    trace4 = px.bar(dff, x='NOC',
+                    y='Medal')
    
-    trace_list = [trace1, trace2, trace3]
-    y_axis_titles = ["Age", "Height", "Weight"]
+    trace_list = [trace1, trace2, trace3, trace4]
+    y_axis_titles = ["Age", "Height", "Weight", "Medal"]
 
 
     for i, (item, title) in enumerate(zip(trace_list, y_axis_titles)):
         fig.add_trace(go.Bar(name=title,
                                 x=item.data[0]['x'], y=item.data[0]['y'], showlegend=True), row=1, col=1)
-
-
+    fig.update_layout(title='Participating countries summaries', plot_bgcolor="rgba(255,255,255,0.9)")
+    fig.update_yaxes(type='log', title='Median/total medals')
     return fig
 
     
