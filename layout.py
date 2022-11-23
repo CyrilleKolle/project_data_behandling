@@ -183,7 +183,7 @@ class Layout:
                                 dcc.Dropdown(
                                     id="country-picker-dropdown",
                                     options=self._countries_options,
-                                    value="SWE",
+                                    value="FRA",
                                     clearable=True,
                                 )
                             ],
