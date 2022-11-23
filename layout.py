@@ -95,7 +95,7 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=8,
+                            lg=7,
                         ),
                         dbc.Col(
                             children=[
@@ -107,7 +107,7 @@ class Layout:
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=3,
+                            lg=5,
                         ),
                     ],
                 ),
