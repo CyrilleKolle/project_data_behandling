@@ -74,6 +74,7 @@ def histogram_all_france_ages(json_df):
     dff = dff['Age'].drop_duplicates().reset_index()
     fig = px.histogram(dff, x="Age", y=dff.index,nbins=10, title='France Age distribution')
     fig.update_layout(bargap=0.1, plot_bgcolor="rgba(255,255,255,0.9)")
+    fig.update_yaxes(title='number of athletes')
     return fig
 
 #%%
