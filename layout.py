@@ -10,130 +10,162 @@ class Layout:
         self._olympics_options_dropdown = [
             {"label": name, "value": symbol} for symbol, name in symbol_dict.items()
         ]
+        self._medals_options_dropdown = [
+            {"label": noc, "value": country} for country, noc in countries_dict.items()
+        ]
         self._countries_options = [
             {"label": noc, "value": country} for country, noc in countries_dict.items()
+        ]
+        self._top_bottom_options = [
+            {"label": option, "value": option} for option in ("top_10", "bottom_10")
+        ]
+        self._season_options = [
+            {"label": option, "value": option} for option in ("summer", "winter", "all")
+        ]
+        self._gender_options = [
+            {"label": option, "value": option}
+            for option in ("men", "women", "everyone")
         ]
 
     def layout(self):
         return dbc.Container(
             [
-                dbc.Card(dbc.CardBody(html.H1("Vive La France")), className="mt-3"),
+                dbc.NavbarSimple(
+                    className="mt-4",
+                    children=[
+                        dbc.NavItem(dbc.NavLink(html.Img(src="assets/olympic.gif", height=80), href="#")),
+                    ],
+                    brand="Olympics Data Visualisation",
+                    brand_href="#",
+                    color="#CBDCCB",
+                    
+                ),
                 dbc.Card(
-                    dbc.CardBody(
-                        dbc.Row(
+                    id="header-card",
+                    className="h-0",
+                    children=[
+                        dbc.CardBody(
+                            dbc.Row(
+                                children=[
+                                    dbc.Card(
+                                        dbc.CardBody(
+                                            children=[
+                                                dbc.Col(
+                                                    dcc.Dropdown(
+                                                        id="olympic-dropdown",
+                                                        options=self._olympics_options_dropdown,
+                                                        value="athlete",
+                                                    ),
+                                                    className="",
+                                                    xs=12,
+                                                    sm=12,
+                                                    md=6,
+                                                    lg=3,
+                                                ),
+                                            ],
+                                        )
+                                    )
+                                ],
+                            ),
+                        )
+                    ],
+                ),
+                dbc.Row(
+                    className="",
+                    children=[
+                        dbc.Col(
                             children=[
                                 dbc.Card(
-                                    dbc.CardBody(
-                                        children=[
-                                            dbc.Col(
-                                                html.Header(html.H2("Athlete Events")),
-                                                className="mx-4",
-                                                xs=12,
-                                                sm=12,
-                                                md=6,
-                                                lg=3,
+                                    className="",
+                                    children=[
+                                        dbc.CardBody(
+                                            dcc.Dropdown(
+                                                id="country-picker-dropdown",
+                                                options=self._countries_options,
+                                                value="FRA",
+                                                clearable=True,
                                             ),
-                                            dbc.Col(
-                                                dcc.Dropdown(
-                                                    id="olympic-dropdown",
-                                                    options=self._olympics_options_dropdown,
-                                                    value="athlete",
-                                                ),
-                                                className="mx-4",
-                                                xs=12,
-                                                sm=12,
-                                                md=6,
-                                                lg=3,
+                                        )
+                                    ],
+                                ),
+                                dbc.Card(
+                                    className="",
+                                    children=[
+                                        dbc.CardBody(
+                                            dcc.Graph(
+                                                id="country-info",
                                             ),
-                                        ],
+                                        )
+                                    ],
+                                ),
+                            ],
+                            xs=12,
+                            sm=12,
+                            md=12,
+                            lg=6,
+                        ),
+                        dbc.Col(
+                            children=[
+                                dbc.Card(
+                                    className="",
+                                    children=[
+                                        dbc.CardBody(
+                                            dcc.RadioItems(
+                                                id="ohlc-radio_top_bottom",
+                                                className="",
+                                                options=self._top_bottom_options,
+                                                value="top_10",
+                                            ),
+                                        ),
+                                    ],
+                                ),
+                                dbc.Card(
+                                    className="",
+                                    children=[
+                                        dbc.CardBody(
+                                            dcc.Graph(
+                                                id="top_10",
+                                            ),
+                                        ),
+                                    ],
+                                ),
+                            ],
+                            xs=12,
+                            sm=12,
+                            md=12,
+                            lg=6,
+                        ),
+                    ],
+                ),
+                dbc.Row(
+                    className="",
+                    children=[
+                        dbc.Col(
+                            className="",
+                            children=[
+                                dbc.CardBody(
+                                    dcc.Graph(
+                                        id="line_gender_from_start",
                                     )
-                                )
-                            ],
-                        ),
-                    )
-                ),
-                dbc.Row(
-                    id="france-trophy",
-                    className="mt-4",
-                    children=[
-                        dbc.Col(
-                            className="mx-1",
-                            children=[
-                                dcc.Graph(
-                                    id="france-max-graph",
                                 ),
                             ],
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=5,
+                            lg=6,
                         ),
                         dbc.Col(
-                            className="mx-1",
                             children=[
-                                dcc.Graph(
-                                    id="france-all-ages",
+                                dbc.Card(
+                                    className="",
+                                    children=[
+                                        dbc.CardBody(
+                                            dcc.Graph(
+                                                id="general",
+                                            ),
+                                        ),
+                                    ],
                                 ),
-                            ],
-                            xs=12,
-                            sm=12,
-                            md=12,
-                            lg=5,
-                        ),
-                    ],
-                ),
-                dbc.Row(
-                    className="mt-4",
-                    children=[
-                        dbc.Col(
-                            children=[
-                                dcc.Graph(
-                                    id="france-medal-distribution",
-                                    style={"display": "inline-block"},
-                                ),
-                            ],
-                            xs=12,
-                            sm=12,
-                            md=12,
-                            lg=7,
-                        ),
-                        dbc.Col(
-                            children=[
-                                dcc.Graph(
-                                    id="top_10",
-                                    style={"display": "inline-block"},
-                                )
-                            ],
-                            xs=12,
-                            sm=12,
-                            md=12,
-                            lg=5,
-                        ),
-                    ],
-                ),
-                dbc.Row(
-                    className="mt-4",
-                    children=[
-                        dbc.Col(
-                            className="mr-1",
-                            children=[
-                                dcc.Graph(
-                                    id="goat-gold",
-                                    style={"display": "inline-block"},
-                                )
-                            ],
-                            xs=12,
-                            sm=12,
-                            md=12,
-                            lg=4,
-                        ),
-                        dbc.Col(
-                            className="mr-1",
-                            children=[
-                                dcc.Graph(
-                                    id="goat-silver",
-                                    style={"display": "inline-block"},
-                                )
                             ],
                             xs=12,
                             sm=12,
@@ -142,49 +174,66 @@ class Layout:
                         ),
                         dbc.Col(
                             children=[
-                                dcc.Graph(
-                                    id="goat-bronze",
-                                    style={"display": "inline-block"},
-                                )
-                            ],
-                            xs=12,
-                            sm=12,
-                            md=12,
-                            lg=4,
-                        ),
-                    ],
-                ),
-                dbc.Row(
-                    className="mt-4 w-full",
-                    children=[
-                        dcc.Graph(
-                            id="sweden-france",
-                        ),
-                    ],
-                ),
-                dbc.Row(
-                    className="mt-4",
-                    children=[
-                        dbc.Col(
-                            className="mx-2",
-                            children=[
-                                dcc.Graph(
-                                    id="country-info",
-                                )
-                            ],
-                            xs=12,
-                            sm=12,
-                            md=12,
-                            lg=9,
-                        ),
-                        dbc.Col(
-                            className="mx-2",
-                            children=[
-                                dcc.Dropdown(
-                                    id="country-picker-dropdown",
-                                    options=self._countries_options,
-                                    value="FRA",
-                                    clearable=True,
+                                dbc.Card(
+                                    className="",
+                                    children=[
+                                        dbc.CardBody(
+                                            className="",
+                                            children=[
+                                                dbc.Row(
+                                                    children=[
+                                                        dbc.Card(
+                                                            className="mb-2",
+                                                            children=[
+                                                                dbc.CardBody(
+                                                                    dcc.Dropdown(
+                                                                        id="country-picker-medals",
+                                                                        options=self._medals_options_dropdown,
+                                                                        value="FRA",
+                                                                        clearable=True,
+                                                                    ),
+                                                                )
+                                                            ],
+                                                        ),
+                                                    ]
+                                                ),
+                                                dbc.Row(
+                                                    children=[
+                                                        dbc.Card(
+                                                            className="mb-2",
+                                                            children=[
+                                                                dbc.CardBody(
+                                                                    dcc.RadioItems(
+                                                                        id="ohlc-season",
+                                                                        className="m-1",
+                                                                        options=self._season_options,
+                                                                        value="all",
+                                                                    )
+                                                                )
+                                                            ],
+                                                        )
+                                                    ]
+                                                ),
+                                                dbc.Row(
+                                                    children=[
+                                                        dbc.Card(
+                                                            className="",
+                                                            children=[
+                                                                dbc.CardBody(
+                                                                    dcc.RadioItems(
+                                                                        id="ohlc-gender",
+                                                                        className="m-1",
+                                                                        options=self._gender_options,
+                                                                        value="everyone",
+                                                                    )
+                                                                )
+                                                            ],
+                                                        )
+                                                    ]
+                                                ),
+                                            ],
+                                        )
+                                    ],
                                 )
                             ],
                             xs=12,
@@ -194,34 +243,101 @@ class Layout:
                         ),
                     ],
                 ),
-              dbc.Row(
-                    className="mt-4",
+                dbc.Row(
+                    className="",
                     children=[
                         dbc.Col(
-                            className="mr-1",
+                            className="",
                             children=[
-                                dcc.Graph(
-                                    id="line_gender_from_start",
+                                dbc.Card(
+                                    className="",
+                                    children=[
+                                        dbc.CardBody(
+                                            className="",
+                                            children=[
+                                                dbc.Row(
+                                                    dbc.Card(
+                                                        className="",
+                                                        children=[
+                                                            dbc.CardBody(
+                                                                className="",
+                                                                children=[
+                                                                    dcc.Graph(
+                                                                        id="yearly-participation",
+                                                                    ),
+                                                                ],
+                                                            )
+                                                        ],
+                                                    )
+                                                ),
+                                                dbc.Row(
+                                                    dbc.Card(
+                                                        className="",
+                                                        children=[
+                                                            dbc.CardBody(
+                                                                className="",
+                                                                children=[
+                                                                    dcc.RangeSlider(
+                                                                        id="year-range",
+                                                                        min=1896,
+                                                                        max=2016,
+                                                                        step=2,
+                                                                        marks=None,
+                                                                        value=[
+                                                                            1936,
+                                                                            1980,
+                                                                        ],
+                                                                        tooltip={"placement": "bottom", "always_visible": True}
+                                                                    ),
+                                                                ],
+                                                            )
+                                                        ],
+                                                    )
+                                                ),
+                                            ],
+                                        )
+                                    ],
                                 )
                             ],
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=6,
+                            lg=8,
                         ),
                         dbc.Col(
                             className="",
                             children=[
-                                dcc.Graph(
-                                    id="scatter_gender_from_start",
-                                    
+                                dbc.Card(
+                                    className="",
+                                    children=[
+                                        dbc.CardBody(
+                                            className="",
+                                            children=[
+                                                dcc.Graph(
+                                                    id="burst",
+                                                ),
+                                            ],
+                                        )
+                                    ],
                                 )
                             ],
                             xs=12,
                             sm=12,
                             md=12,
-                            lg=6,
+                            lg=4,
                         ),
+                    ],
+                ),
+                dbc.Row(
+                    className="my-5 mx-4",
+                    children=[
+                        dbc.CardFooter(
+                            className="",
+                            children=[
+                                html.H5("Cyrille Kolle"),
+                                html.H6("IT-Högskolan, Dec 2022"),
+                            ],
+                        )
                     ],
                 ),
                 # storing intermediate value on clients browser in order to share between several callbacks

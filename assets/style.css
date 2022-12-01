@@ -1,143 +1,115 @@
 /* Style Document for the Dashboard */
 
-body{
-    background-color:rgba(244, 244, 244, 0.896);
-    /*background-image: url("volley.jpg"), url("4k_diving.png"), url("run.jpg"), url("flag2.png");
+body {
+  background-color: rgba(244, 244, 244, 0.896);
+  /*background-image: url("volley.jpg"), url("4k_diving.png"), url("run.jpg"), url("flag2.png");
     background-position: top;
     background-repeat: no-repeat, no-repeat, no-repeat, repeat;*/
 }
 
 label {
-    margin: 0 0.5rem 0 0.5rem; 
+  margin: 0 0.5rem 0 0.5rem;
 }
 
 /* Headers */
 
 /* Main Box */
-h1{
-    color: rgb(31, 31, 176);
-    background-color: whitesmoke;
-    background: linear-gradient(to left,
-    red,
-    whitesmoke,
-    whitesmoke,
-    blue);
-    padding: 2%;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 500%;
-    text-shadow: 1px 1px rgba(14, 189, 247, 0.758), 1px 1px rgb(93, 93, 94);
-    text-align: center;
+h1 {
+  color: rgb(31, 31, 176);
+  background-color: whitesmoke;
+  background: linear-gradient(to left, red, whitesmoke, whitesmoke, blue);
+  padding: 2%;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 500%;
+  text-shadow: 1px 1px rgba(14, 189, 247, 0.758), 1px 1px rgb(93, 93, 94);
+  text-align: center;
 }
 
-
-.card-body{
-    background: linear-gradient(to left,
-    red,
-    whitesmoke,
-    whitesmoke,
-    blue);
-    padding-top: 1%;
-    box-shadow: none;
-
-
+.card-body {
+  padding-top: 1%;
+  box-shadow: none;
 }
 
-#mt-3 card
-{
-    margin-top: 100%;
-
+#mt-3 card {
+  margin-top: 100%;
 }
 
-#header2
-{
-    margin-top: 10%;
-
+#header2 {
+  margin-top: 10%;
 }
 
-
-.card{
-    background: linear-gradient(to left,
-    red,
-    whitesmoke,
-    whitesmoke,
-    blue);
-    box-shadow: none;
+.card {
+  background: transparent;
+  box-shadow: none;
 }
 
 /* Headers */
 
-h2{
-    color: rgb(31, 31, 176);
-    border: 1px line rgb(126, 174, 180);
-    background-color: whitesmoke;
-    padding: 2%;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 200%;
-    text-shadow: 1px 1px rgba(14, 189, 247, 0.758), 1px 1px rgb(93, 93, 94);
-    text-align: center;
-    border-radius: 1%;
-
+h2 {
+  color: rgb(31, 31, 176);
+  border: 1px line rgb(126, 174, 180);
+  background-color: whitesmoke;
+  padding: 2%;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 200%;
+  text-shadow: 1px 1px rgba(14, 189, 247, 0.758), 1px 1px rgb(93, 93, 94);
+  text-align: center;
+  border-radius: 1%;
 }
 
-h3{
-    color: Yellow;
+h3 {
+  color: Yellow;
 }
 
 /* Divs */
-
-
 
 /*.row {
     background-color: yellowgreen;
 }*/
 
-.bglayer{
-    color:red;
-    background-color: red;
+.bglayer {
+  color: red;
+  background-color: red;
 }
 
 /* General Graph Stylings*/
 
-.dash-graph{
-    
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    
-  
+.dash-graph {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
-.goat-gold{
-    background-color: red;
-    color:blue;
+.goat-gold {
+  background-color: red;
+  color: blue;
 }
 
 /* SVG Files styling */
 
-.main-svg{
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    border-radius: 2%;
-    border-color: rgb(125, 191, 230);
-    border-style: solid;
-    border-width: thin;
+.main-svg {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  border-radius: 2%;
+  border-color: rgb(125, 191, 230);
+  border-style: solid;
+  border-width: thin;
 }
 
-.col{
-    margin-left: auto;
-    margin-right: auto;
-    width: 300%;
-    color:red;
-    background-color: red;
+.col {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300%;
+  color: red;
 }
 
-.container{
-    margin-left: auto;
-    margin-right: auto;
-    width: 300%;
-   /* border: 1px line rgb(126, 174, 180);
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300%;
+  /* border: 1px line rgb(126, 174, 180);
         background: linear-gradient(to left,
     red,
     whitesmoke,
@@ -147,67 +119,113 @@ h3{
 
 /* Drop Down menu colors*/
 
-.Select-menu-outer{
-color:blue;
-background-color: rgb(240, 238, 238);
-font-family: "Times New Roman", Times, serif;
-font-size: 100%;
-
+.Select-menu-outer {
+  color: blue;
+  background-color: rgb(240, 238, 238);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 100%;
 }
-.Select-value{
-    color:blue;
-    background-color: rgb(209, 240, 215);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 100%;
-    font-weight: bold;
-}
-
-.Select-clear{
-    color:red;
+.Select-value {
+  color: blue;
+  background-color: rgb(209, 240, 215);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  font-weight: bold;
 }
 
-#france-trophy{
-    padding-left: 10%;
+.Select-clear {
+  color: red;
 }
 
-#country-info{
-    padding-left: 30%;
+#france-trophy {
+  padding-left: 10%;
 }
 
+.dash-dropdown {
+  color: rgb(139, 139, 234);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 110%;
+  font-weight: bold;
+}
 
+#country-info {
+  margin-top: -12px;
+}
+#france-max-graph {
+  margin: auto;
+}
+#france-all-ages {
+  margin: auto;
+}
+#country-picker-dropdown {
+  width: 165px;
 
-.dash-dropdown{
-    color:rgb(139, 139, 234);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 110%;
-    font-weight: bold;
+  float: right;
 }
-#goat-gold{
-    width:99%;
-    background-color: rgb(0, 179, 255);
+#header-card {
+  height: 0px;
+  visibility: hidden;
 }
-#goat-silver{
-    width:99%;
-    background-color: rgb(0, 179, 255);
+#ohlc-season {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  border-radius: 5%;
+  border-color: rgb(125, 191, 230);
+  border-style: solid;
+  border-width: thin;
+  padding: 30px;
 }
-#goat-bronze{
-    width:99%;
-    background-color: rgb(0, 179, 255);
+#ohlc-gender {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  border-radius: 5%;
+  border-color: rgb(125, 191, 230);
+  border-style: solid;
+  border-width: thin;
+  padding: 20px;
 }
-#france-medal-distribution{
-    width:98%
+#country-picker-dropdown {
+  margin-left: auto;
+  margin-right: auto;
+  width: 165px;
+  border-radius: 2%;
+  width: 100%;
+  padding: 20px;
 }
-#france-sweden{
-    width:89%
+#country-picker-medals {
+  margin-left: auto;
+  margin-right: auto;
+  width: 165px;
+  border-radius: 2%;
+  width: 100%;
+  padding: 20px;
 }
-#country-info{
-    width:98%
+
+#ohlc-radio_top_bottom {
+  padding: 20px;
 }
-#france-max-graph{
-    width:99%;
-    margin: auto
+input {
+  margin-left: 10px;
+  margin-right: 10px;
 }
-#france-all-ages{
-    width:99%;
-    margin: auto
+.Select-value {
+  background: transparent;
+}
+#yearly-participation {
+  height: 400px;
+  margin-top: -12px;
+}
+#year-range {
+}
+.navbar-brand {
+  color: red;
+}
+
+img {
+  border-radius: 10%;
+}
+a {
+  color: red;
 }
