@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'olympicslabb1'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E4BBF5C986D342CAA40E1429D741B008 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_01B05F3EF0B74FD5BE0AB6147CB3C8CB }}
