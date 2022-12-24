@@ -1,3 +1,7 @@
-dash
+pycovid
+numpy
 pandas
-guninicorn
+dash
+gunicorn
+matplotlib
+ipykernel
