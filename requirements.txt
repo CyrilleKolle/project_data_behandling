@@ -4,3 +4,8 @@ dash
 gunicorn
 matplotlib
 ipykernel
+plotly-express
+requests
+openpyxl
+dash-bootstrap-components
+numexpr
